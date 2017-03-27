@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>定义函数，创建类</title>
+</head>
+<body>
+	<script type="text/javascript">
+		/*定义函数*/
+		var humanES6 = {
+			breathe(name) {
+				console.log(name + ' is breathing...');
+			}
+		};
+		humanES6.breathe('curi');
+
+		/*创建类*/
+		class Human {
+			constructor(name) {
+				this.name = name;
+			}
+
+			breathe() {
+				console.log(this.name + ' is breathing');
+			}
+		}
+		var man = new Human('jarson');
+		man.breathe();
+	</script>
+</body>
+</html>

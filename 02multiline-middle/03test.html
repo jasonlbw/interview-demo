@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>完美居中方案</title>
+	<style>
+		div#wrap {
+			height: 400px;
+			width: 760px;
+			display: table;
+			border: 1px solid red;
+			_position: relative;
+		}
+		div#subwrap {
+			display: table-cell;
+			vertical-align: middle;
+			_position: absolute;
+			_top: 50%;
+		}
+		div#content {
+			_position: relative;
+			_top: -50%;
+		}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<div id="subwrap">
+			<div id="content">
+				<pre>
+					我要完美居中了
+					div#wrap {
+						height: 400px;
+						width: 760px;
+						display: table;
+						_position: relative;
+					}
+					div#subwrap {
+						display: table-cell;
+						vertical-align: middle;
+						_position: absolute;
+						_top: 50%;
+					}
+					div#content {
+						_position: relative;
+						_top: -50%;
+					}
+				</pre>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

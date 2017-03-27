@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>child</title>
+	<style type="text/css">
+		body {
+			font: 14px 'Microsoft YaHei';
+		}
+		#content {
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="child">
+		<label>从父页面接收到的数据：</label>
+		<span id="content">
+			暂无
+		</span>
+	</div>
+	<script type="text/javascript">
+		var content = document.getElementById('content');
+		window.addEventListener('message', function(e) {
+			e = e || window.event;
+			if(e.source != window.parent) return false;
+			
+			content.innerHTML = e.data;
+
+			e.source.postMessage('接收' + e.data + '成功', '*');
+		}, false);
+	</script>
+</body>
+</html>

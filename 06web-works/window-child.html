@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>window-child</title>
+</head>
+<body>
+	<div class="container">
+		<input type="text" id="msg" />
+		<input type="button" id="send" value="发送" />
+	</div>
+	<script type="text/javascript">
+		var parent = window.opener;
+		if(parent && !parent.closed) {
+			parent.postMessage('我是子窗口的初始消息', 'http://parent.com:8080');						
+			var sendBtn = document.getElementById('send');
+			sendBtn.addEventListener('click', function() {
+				var msg = document.getElementById('msg').value;
+				parent.postMessage(msg, '*');
+			});
+		}
+		
+	</script>
+</body>
+</html>

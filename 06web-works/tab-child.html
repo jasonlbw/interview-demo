@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>tab-child</title>
+</head>
+<body>
+	<div class="container">
+		<input type="text" id="msg" />
+		<input type="button" id="send" value="发送" />
+	</div>
+	<script type="text/javascript">
+		//发送消息
+		var parent = window.opener;
+		if(parent && !parent.closed) {
+			parent.postMessage('我是子选项卡的消息', 'http://parent.com:8080');
+
+			var sendBtn = document.getElementById('send');
+			sendBtn.addEventListener('click', function() {
+				var msg = document.getElementById('msg').value;
+				parent.postMessage(msg, '*');
+			});
+		}
+	</script>
+</body>
+</html>

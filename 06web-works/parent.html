@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>message</title>
+	<style type="text/css">
+		body {
+			font: 14px 'Microsoft YaHei';
+		}
+		#content, #tabMsg, #windowMsg {
+			color: red;
+		}
+		.parent {
+			width: 40%;
+			padding: 10px;
+			border: 1px solid red;
+			float: left;
+		}
+		.parent p {
+			margin: 10px auto;
+			background-color: #CCC;
+			line-height: 20px;
+		}
+		.child {
+			width: 40%;
+			border: 1px solid orange;
+			float: right;
+		}
+	</style>
+</head>
+<body>
+	<div class="parent">
+		<div>
+			<input type="text" id="msg" />
+			<input type="button" id="send" value="发送" />
+		</div>
+		<p>
+			<label>子页面发送的内容：</label>
+			<span id="content">
+				暂无
+			</span>
+		</p>
+		<p>
+			<label><a target="_blank" href="http://tabchild.com:8080/tab-child.html">子选项卡</a>页面发送的数据：</label>
+			<span id="tabMsg"></span>
+		</p>
+		<p>
+			<label><a id="newWindow" href="javascript:;">子窗口</a>页面发送的数据：</label>
+			<span id="windowMsg"></span>
+		</p>
+	</div>
+	<div class="child">
+		<iframe src="http://child.com:8080/child.html" frameborder="0"></iframe>
+	</div>
+
+	<script type="text/javascript">
+		window.onload = function() {
+			var $ = function(id) {
+				return document.getElementById(id);
+			}
+
+			//给子iframe/子tab/子窗口发送数据
+			var frame = window.frames[0] || $('child').contentWindow;
+			var content = $('content');
+			var tabContent = $('tabMsg');
+			var windowContent = $('windowMsg');
+
+			window.addEventListener('message', function(e) {
+				e = e || window.event;
+				if(e.source === frame) {
+					content.innerHTML = e.data;
+				}
+				if(e.origin === 'http://tabchild.com:8080') {
+					tabContent.innerHTML = e.data;
+				} else if(e.origin === 'http://windowchild.com:8080') {
+					windowContent.innerHTML = e.data;
+				}
+				
+			});
+
+			//主页面给iframe子页面发送消息
+			var sendBtn = $('send');
+			sendBtn.addEventListener('click', function(e) {
+				var msg = $('msg');
+				frame.postMessage(msg.value, 'http://child.com:8080');
+			});
+
+			//创建新窗口，并跟父页面传递消息
+			var newWindow = $('newWindow');
+			newWindow.addEventListener('click', function(e) {
+				e = e || window.event;
+				e.preventDefault();
+
+				//四个参数：URL(可选字符串，打开窗口的地址)，name(可选字符串，标识窗口)，features(可选字符串，设置窗口属性)，replace(浏览历史中是新增该URL还是替换)
+				window.open('http://windowchild.com:8080/window-child.html', 'windowchild', 'width=800,height=600');
+			});
+		}
+	</script>
+</body>
+</html>

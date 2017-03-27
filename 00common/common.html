@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Class相关操作方法</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var jason = {};
+
+		(function(jason) {			
+			jason.common = {
+				addClass: function(obj, cls) {
+					cls = cls || '';
+					if(!cls) return false;
+
+					var clsName = obj.className;
+					var blank = (clsName != '') ? (clasName[clasName.length - 1] === ' ') ? '' : ' ' : '';
+					clsName += blank + cls;
+					obj.className = clsName;
+				},
+				removeClass: function(obj, cls) {
+					cls = cls || '';
+					if(!cls) return false;
+
+					obj.className.replace(/\s+/g, ' ').replace(' ' + cls + ' ', ' ').trim();
+				},
+				hasClass: function(obj, cls) {
+					cls = cls || '';
+					if(!cls) return false;
+
+					var clsList = obj.className.split(/\s+/);
+					return clsList.indexOf(cls) > -1;
+				}
+			}
+		})(jason)
+	</script>
+</body>
+</html>
