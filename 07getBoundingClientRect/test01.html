@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+	<style>
+		html, body {
+			margin: 0;
+			padding: 0;
+		}
+		.pos {
+			height: 100px;
+		}
+		#demo {
+			width: 200px;
+			height: 200px;
+			border: 1px solid red;
+		}
+	</style>
+</head>
+<body>
+	<div class="pos"></div>
+	<div id="demo"></div>
+	<input type="button" id="btn" value="点击" />
+	<script type="text/javascript">
+		function getOffset(el) {
+			var _t = 0, _l = 0;
+			while(el.offsetParent) {
+				_t += el.offsetTop;
+				_l += el.offsetLeft;
+				el = el.offsetParent;
+			}
+			return [_t, _l];
+		}
+		var demo = document.querySelector('#demo');
+		document.querySelector('#btn').onclick = function() {
+			var pos = demo.getBoundingClientRect();
+			var offsets = getOffset(demo);
+			console.log(pos.top + ',' + pos.left + '----' + offsets);
+			var sTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
+			console.log(sTop + '-----' + (offsets[0] - pos.top));
+		}
+	</script>
+</body>
+</html>
