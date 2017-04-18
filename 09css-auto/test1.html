@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>高度自适应</title>
+	<style>
+		.container {
+			position: relative;
+		}
+	    #outer {
+	      position:absolute; 
+	      height:auto; 
+	      width:200px; 
+	      border: 1px solid red; 
+	   }
+	   #inner {
+	      position:absolute; 
+	      height:100%; 
+	      width:20px; 
+	      border: 1px solid black; 
+	   }
+	   #outer2 {
+	    	top: 100px;
+			padding-left: 23px;
+			position:absolute; 
+			height:auto; 
+			width:200px; 
+			border: 1px solid red; 
+	   }
+	   #inner2 {
+	      left:0;
+	      position:absolute; 
+	      height:100%; 
+	      width:20px; 
+	      border: 1px solid black; 
+	   }
+
+	   .test {
+	   	margin-bottom: 100px;
+	   	width: 200px;
+	   	height: 100px;
+	   	border: 1px solid red;
+	   }
+	   .test .test-child {
+	   	width: 50%;
+	   	height: 50%;
+	   	border: 1px solid green;
+	   }
+	</style>
+</head>
+<body>
+	<div class="test">
+		<div class="test-child"></div>
+	</div>
+
+	<div class="container">
+		<div id='outer'>
+	   <div id='inner'>
+	   </div>
+	   text
+	</div>
+
+	<div id='outer2'>
+	   <div id='inner2'>
+	   </div>
+	   text
+	</div>
+	</div>
+</body>
+</html>
